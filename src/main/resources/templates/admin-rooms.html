@@ -1,0 +1,512 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomBooker - Manage Rooms</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <style>
+
+        /* Delete Button */
+
+        .delete-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-left: 6px;
+            background: #dc3545;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #b02a37;
+        }
+
+
+        /* Confirmation Modal */
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+
+        .delete-modal {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
+            overflow: hidden;
+            animation: modalAppear 0.18s ease-out;
+        }
+
+
+        @keyframes modalAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+
+        .modal-top {
+            padding: 25px 28px 18px;
+            text-align: center;
+        }
+
+
+        .warning-icon {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #fff1f2;
+            color: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+
+        .modal-top h2 {
+            margin: 0 0 8px;
+            font-size: 21px;
+            color: #1f2937;
+        }
+
+
+        .modal-top p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            padding: 20px 28px 26px;
+        }
+
+
+        .modal-cancel-btn,
+        .modal-delete-btn {
+            flex: 1;
+            height: 46px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+
+        .modal-cancel-btn {
+            background: white;
+            border: 1px solid #d1d5db;
+            color: #374151;
+        }
+
+
+        .modal-cancel-btn:hover {
+            background: #f8fafc;
+        }
+
+
+        .modal-delete-btn {
+            background: #dc3545;
+            border: 1px solid #dc3545;
+            color: white;
+        }
+
+
+        .modal-delete-btn:hover {
+            background: #b02a37;
+            border-color: #b02a37;
+        }
+
+
+        @media (max-width: 500px) {
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="container header-content">
+
+        <div class="logo">
+            Room<span>Booker</span>
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="/admin-dashboard">
+                Admin Dashboard
+            </a>
+
+            <a href="/admin-rooms">
+                Manage Rooms
+            </a>
+
+            <a href="/admin-add-room">
+                Add Room
+            </a>
+
+            <a href="/admin-bookings">
+                Bookings
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main class="main">
+
+    <div class="container">
+
+
+        <div class="dashboard-heading">
+
+            <h1 class="page-title">
+                Manage Meeting Rooms
+            </h1>
+
+            <p class="page-subtitle">
+                View and manage all meeting rooms in the system.
+            </p>
+
+        </div>
+
+
+
+        <div class="rooms-table-container">
+
+            <table class="rooms-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>Room ID</th>
+
+                        <th>Room Name</th>
+
+                        <th>Capacity</th>
+
+                        <th>Amenities</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                    <tr th:each="room : ${rooms}">
+
+
+                        <td th:text="${room.roomId}">
+                            2
+                        </td>
+
+
+                        <td class="room-name"
+                            th:text="${room.roomName}">
+                            Seminar Hall
+                        </td>
+
+
+                        <td th:text="${room.capacity}">
+                            50
+                        </td>
+
+
+                        <td th:text="${room.amenities}">
+                            AC, Fan, Projector
+                        </td>
+
+
+                        <td>
+
+                            <span class="available-status"
+                                  th:text="${room.status}">
+                                Available
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+
+                            <!-- Edit -->
+
+                            <a th:href="@{/admin-edit-room(roomId=${room.roomId})}"
+                               class="small-book-btn">
+
+                                Edit
+
+                            </a>
+
+
+                            <!-- Delete -->
+
+                            <button type="button"
+                                    class="delete-btn"
+                                    th:attr="data-room-id=${room.roomId}"
+                                    th:attrappend="data-room-name=${room.roomName}"
+                                    onclick="openDeleteModal(this)">
+
+                                Delete
+
+                            </button>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+
+                    <!-- No rooms -->
+
+                    <tr th:if="${#lists.isEmpty(rooms)}">
+
+                        <td colspan="6"
+                            style="text-align: center;
+                                   padding: 35px;
+                                   color: #777;">
+
+                            No meeting rooms found.
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <div class="rooms-back">
+
+            <a href="/admin-dashboard"
+               class="btn btn-secondary">
+
+                ← Back to Admin Dashboard
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 RoomBooker. Meeting Room Booking System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- Delete Confirmation Modal -->
+
+<div class="modal-overlay"
+     id="deleteModal">
+
+
+    <div class="delete-modal">
+
+
+        <div class="modal-top">
+
+            <div class="warning-icon">
+                !
+            </div>
+
+
+            <h2>
+                Delete Room?
+            </h2>
+
+
+            <p>
+                Are you sure you want to delete
+                <strong id="roomNameText">this room</strong>?
+                <br>
+                This action cannot be undone.
+            </p>
+
+        </div>
+
+
+
+        <div class="modal-actions">
+
+
+            <button type="button"
+                    class="modal-cancel-btn"
+                    onclick="closeDeleteModal()">
+
+                Cancel
+
+            </button>
+
+
+            <button type="button"
+                    class="modal-delete-btn"
+                    onclick="confirmDelete()">
+
+                Delete Room
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    let selectedRoomId = null;
+
+
+    function openDeleteModal(button) {
+
+        selectedRoomId =
+            button.getAttribute("data-room-id");
+
+        const roomName =
+            button.getAttribute("data-room-name");
+
+        document.getElementById("roomNameText")
+                .textContent = roomName;
+
+        document.getElementById("deleteModal")
+                .classList.add("show");
+    }
+
+
+    function closeDeleteModal() {
+
+        document.getElementById("deleteModal")
+                .classList.remove("show");
+
+        selectedRoomId = null;
+    }
+
+
+    function confirmDelete() {
+
+        if (selectedRoomId !== null) {
+
+            window.location.href =
+                "/admin-delete-room?roomId="
+                + selectedRoomId;
+
+        }
+
+    }
+
+
+    /* Close modal when clicking outside */
+
+    document.getElementById("deleteModal")
+        .addEventListener("click", function(event) {
+
+            if (event.target === this) {
+
+                closeDeleteModal();
+
+            }
+
+        });
+
+</script>
+
+
+</body>
+
+</html>
+```

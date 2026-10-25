@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomBooker - Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="container header-content">
+
+            <div class="logo">
+                Room<span>Booker</span>
+            </div>
+
+            <nav class="nav">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/rooms">Rooms</a>
+                <a href="/book">Book Room</a>
+                <a href="/my-bookings">My Bookings</a>
+                <a href="/logout">Logout</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="main">
+
+        <div class="container">
+
+            <!-- Dashboard Heading -->
+            <div class="dashboard-heading">
+
+                <h1 class="page-title">
+                    Dashboard
+                </h1>
+
+                <p class="page-subtitle">
+                    Manage your meeting room bookings easily and efficiently.
+                </p>
+
+            </div>
+
+
+            <!-- Hero Section -->
+            <div class="hero-section">
+
+                <!-- Photo -->
+                <img src="/images/meeting-room.jpg"
+                     alt="Meeting Room"
+                     class="dashboard-image">
+
+
+                <!-- Welcome Content -->
+                <div class="hero-content">
+
+                    <h2>
+                        Welcome to RoomBooker
+                    </h2>
+
+                    <p>
+                        Book, view and manage meeting rooms from one place.
+                    </p>
+
+                    <a href="/book" class="btn">
+                        Book a Room
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Dashboard Cards -->
+            <div class="dashboard-grid">
+
+                <!-- View Rooms -->
+                <a href="/rooms" class="dashboard-card">
+
+                    <div class="card-icon">
+                        🏢
+                    </div>
+
+                    <h3>
+                        View Rooms
+                    </h3>
+
+                    <p>
+                        Check available meeting rooms, capacity and amenities.
+                    </p>
+
+                    <span class="card-link">
+                        View Rooms →
+                    </span>
+
+                </a>
+
+
+                <!-- Book Room -->
+                <a href="/book" class="dashboard-card">
+
+                    <div class="card-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        Book a Room
+                    </h3>
+
+                    <p>
+                        Select a room, date and time slot to make a booking.
+                    </p>
+
+                    <span class="card-link">
+                        Book Now →
+                    </span>
+
+                </a>
+
+
+                <!-- My Bookings -->
+                <a href="/my-bookings" class="dashboard-card">
+
+                    <div class="card-icon">
+                        📋
+                    </div>
+
+                    <h3>
+                        My Bookings
+                    </h3>
+
+                    <p>
+                        View your bookings and manage existing reservations.
+                    </p>
+
+                    <span class="card-link">
+                        View Bookings →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- Information Section -->
+            <div class="info-section">
+
+                <div class="info-box">
+
+                    <h3>
+                        How RoomBooker Works
+                    </h3>
+
+                    <p>
+                        Choose a meeting room, select your preferred date and
+                        time slot, and confirm your booking.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>
+                        Easy Management
+                    </h3>
+
+                    <p>
+                        You can view your bookings and cancel reservations
+                        whenever required.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 RoomBooker. Meeting Room Booking System.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

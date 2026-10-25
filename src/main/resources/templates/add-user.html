@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomBooker - Create Account</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <style>
+
+        .account-page {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .account-header {
+            margin-bottom: 28px;
+        }
+
+        .account-header h1 {
+            margin-bottom: 8px;
+        }
+
+        .account-header p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        .account-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            overflow: hidden;
+        }
+
+        .account-card-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f8faff;
+        }
+
+        .account-card-header h2 {
+            margin: 0 0 6px;
+            font-size: 20px;
+            color: #1f2937;
+        }
+
+        .account-card-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .account-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 48px;
+            padding: 0 14px;
+            box-sizing: border-box;
+
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+
+            background: #ffffff;
+            color: #1f2937;
+
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #315bb5;
+            box-shadow: 0 0 0 3px rgba(49,91,181,0.10);
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .create-btn {
+            flex: 1;
+            height: 50px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #315bb5;
+            color: white;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .create-btn:hover {
+            background: #274b98;
+        }
+
+        .back-btn {
+            height: 50px;
+            padding: 0 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+
+            background: white;
+            color: #374151;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #f8fafc;
+        }
+
+        @media (max-width: 600px) {
+
+            .account-form {
+                padding: 24px;
+            }
+
+            .account-card-header {
+                padding: 20px 24px;
+            }
+
+            .account-actions {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<header class="header">
+
+    <div class="container header-content">
+
+        <div class="logo">
+            Room<span>Booker</span>
+        </div>
+
+        <nav class="nav">
+
+            <a href="/">
+                Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="main">
+
+    <div class="container account-page">
+
+        <!-- Page Heading -->
+
+        <div class="account-header">
+
+            <h1 class="page-title">
+                Create New Account
+            </h1>
+
+            <p>
+                Create your RoomBooker account to book and manage meeting rooms.
+            </p>
+
+        </div>
+
+
+        <!-- Account Card -->
+
+        <div class="account-card">
+
+            <div class="account-card-header">
+
+                <h2>
+                    Account Information
+                </h2>
+
+                <p>
+                    Enter your details to create a new account.
+                </p>
+
+            </div>
+
+
+            <form action="/add-user"
+                  method="post"
+                  class="account-form">
+
+
+                <!-- Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           placeholder="Enter your full name"
+                           required>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           placeholder="Enter your email address"
+                           required>
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           placeholder="Create a password"
+                           required>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="account-actions">
+
+                    <a href="/"
+                       class="back-btn">
+                        ← Back to Login
+                    </a>
+
+                    <button type="submit"
+                            class="create-btn">
+                        Create Account
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 RoomBooker. Meeting Room Booking System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

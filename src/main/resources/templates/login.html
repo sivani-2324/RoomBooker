@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomBooker - Login</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <h1>RoomBooker</h1>
+
+        <h2>Meeting Room Booking System</h2>
+
+        <form action="/login" method="post">
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input type="email"
+
+                       name="email"
+
+                       placeholder="Enter your email"
+
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="password"
+
+                       name="password"
+
+                       placeholder="Enter your password"
+
+                       required>
+
+            </div>
+
+            <button type="submit" class="btn">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <p style="margin-top: 20px;">
+
+            Don't have an account?
+
+        </p>
+
+        <a href="/add-user"
+
+           class="btn btn-secondary"
+
+           style="margin-top: 10px;">
+
+            Create Account
+
+        </a>
+
+        <p class="error"
+
+           th:if="${error}"
+
+           th:text="${error}">
+
+        </p>
+
+        <p class="success"
+
+           th:if="${success}"
+
+           th:text="${success}">
+
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

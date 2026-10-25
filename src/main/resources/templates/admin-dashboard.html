@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomBooker - Admin Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <style>
+        .analytics-number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #2457d6;
+            margin-top: 12px;
+        }
+
+        .section-heading {
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container header-content">
+
+        <div class="logo">
+            Room<span>Booker</span>
+        </div>
+
+        <nav class="nav">
+            <a href="/admin-dashboard">Admin Dashboard</a>
+            <a href="/admin-rooms">Manage Rooms</a>
+            <a href="/admin-add-room">Add Room</a>
+            <a href="/admin-bookings">Bookings</a>
+            <a href="/logout">Logout</a>
+        </nav>
+
+    </div>
+</header>
+
+<main class="main">
+    <div class="container">
+
+        <!-- Dashboard Heading -->
+        <div class="dashboard-heading">
+            <h1 class="page-title">Admin Dashboard</h1>
+            <p class="page-subtitle">
+                Manage meeting rooms and booking activities.
+            </p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-heading">
+            <h2>Quick Actions</h2>
+            <p class="page-subtitle">
+                Manage rooms and bookings from one place.
+            </p>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <!-- Manage Rooms -->
+            <a href="/admin-rooms" class="dashboard-card">
+                <div class="card-icon">🏢</div>
+                <h3>Manage Rooms</h3>
+                <p>
+                    View and manage all existing meeting rooms.
+                </p>
+                <span class="card-link">Manage Rooms →</span>
+            </a>
+
+            <!-- Add New Room -->
+            <a href="/admin-add-room" class="dashboard-card">
+                <div class="card-icon">➕</div>
+                <h3>Add New Room</h3>
+                <p>
+                    Add a new meeting room with its details.
+                </p>
+                <span class="card-link">Add Room →</span>
+            </a>
+
+            <!-- View Bookings -->
+            <a href="/admin-bookings" class="dashboard-card">
+                <div class="card-icon">📋</div>
+                <h3>View Bookings</h3>
+                <p>
+                    View all meeting room bookings and their status.
+                </p>
+                <span class="card-link">View Bookings →</span>
+            </a>
+
+        </div>
+
+        <!-- Reports & Analytics: Below Quick Actions -->
+        <div class="section-heading">
+            <h2>Reports &amp; Analytics</h2>
+            <p class="page-subtitle">
+                Overview of your meeting room booking statistics.
+            </p>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <!-- Total Rooms -->
+            <div class="dashboard-card">
+                <div class="card-icon">🏢</div>
+                <h3>Total Rooms</h3>
+                <p class="analytics-number"
+                   th:text="${totalRooms}">0</p>
+            </div>
+
+            <!-- Total Bookings -->
+            <div class="dashboard-card">
+                <div class="card-icon">📅</div>
+                <h3>Total Bookings</h3>
+                <p class="analytics-number"
+                   th:text="${totalBookings}">0</p>
+            </div>
+
+            <!-- Active Bookings -->
+            <div class="dashboard-card">
+                <div class="card-icon">✅</div>
+                <h3>Active Bookings</h3>
+                <p class="analytics-number"
+                   th:text="${activeBookings}">0</p>
+            </div>
+
+            <!-- Cancelled Bookings -->
+            <div class="dashboard-card">
+                <div class="card-icon">❌</div>
+                <h3>Cancelled Bookings</h3>
+                <p class="analytics-number"
+                   th:text="${cancelledBookings}">0</p>
+            </div>
+
+        </div>
+
+        <!-- Information Section -->
+        <div class="info-section">
+
+            <div class="info-box">
+                <h3>Administrator</h3>
+                <p>
+                    Use the admin dashboard to manage rooms and
+                    monitor booking activities.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>Room Management</h3>
+                <p>
+                    Add new rooms and maintain existing room
+                    information from one place.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>
+            © 2026 RoomBooker. Meeting Room Booking System.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

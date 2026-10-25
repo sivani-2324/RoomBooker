@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomBooker - Add Room</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <style>
+
+        .add-room-page {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .add-room-header {
+            margin-bottom: 28px;
+        }
+
+        .add-room-header h1 {
+            margin-bottom: 8px;
+        }
+
+        .add-room-header p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .add-room-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            overflow: hidden;
+        }
+
+        .add-room-card-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f8faff;
+        }
+
+        .add-room-card-header h2 {
+            margin: 0 0 6px;
+            font-size: 20px;
+            color: #1f2937;
+        }
+
+        .add-room-card-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .add-room-form {
+            padding: 32px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #1f2937;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group input,
+        .form-group select {
+            height: 48px;
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #315bb5;
+            box-shadow: 0 0 0 3px rgba(49,91,181,0.10);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .add-room-btn {
+            flex: 1;
+            height: 50px;
+            border: none;
+            border-radius: 8px;
+            background: #315bb5;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .add-room-btn:hover {
+            background: #274b98;
+        }
+
+        .back-btn {
+            height: 50px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            color: #374151;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #f8fafc;
+        }
+
+        @media (max-width: 700px) {
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .add-room-form {
+                padding: 24px;
+            }
+
+            .add-room-card-header {
+                padding: 20px 24px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="container header-content">
+
+        <div class="logo">
+            Room<span>Booker</span>
+        </div>
+
+        <nav class="nav">
+
+            <a href="/admin-dashboard">
+                Admin Dashboard
+            </a>
+
+            <a href="/admin-rooms">
+                Manage Rooms
+            </a>
+
+            <a href="/admin-add-room">
+                Add Room
+            </a>
+
+            <a href="/admin-bookings">
+                Bookings
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="main">
+
+    <div class="container add-room-page">
+
+
+        <div class="add-room-header">
+
+            <h1 class="page-title">
+                Add New Meeting Room
+            </h1>
+
+            <p>
+                Enter the details below to add a new meeting room.
+            </p>
+
+        </div>
+
+
+        <div class="add-room-card">
+
+
+            <div class="add-room-card-header">
+
+                <h2>
+                    Room Details
+                </h2>
+
+                <p>
+                    Provide the required information for the new room.
+                </p>
+
+            </div>
+
+
+            <form action="/admin-add-room"
+                  method="post"
+                  class="add-room-form">
+
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="roomId">
+                            Room ID
+                        </label>
+
+                        <input type="number"
+                               id="roomId"
+                               name="roomId"
+                               placeholder="Enter room ID"
+                               required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="roomName">
+                            Room Name
+                        </label>
+
+                        <input type="text"
+                               id="roomName"
+                               name="roomName"
+                               placeholder="Enter room name"
+                               required>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="capacity">
+                            Capacity
+                        </label>
+
+                        <input type="number"
+                               id="capacity"
+                               name="capacity"
+                               placeholder="Enter room capacity"
+                               min="1"
+                               required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select id="status"
+                                name="status"
+                                required>
+
+                            <option value="Available">
+                                Available
+                            </option>
+
+                            <option value="Unavailable">
+                                Unavailable
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="amenities">
+                        Amenities
+                    </label>
+
+                    <textarea id="amenities"
+                              name="amenities"
+                              placeholder="Example: AC, Fan, Projector, TV"
+                              required></textarea>
+
+                </div>
+
+
+                <div class="form-actions">
+
+
+                    <a href="/admin-dashboard"
+                       class="back-btn">
+
+                        ← Back to Admin Dashboard
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="add-room-btn">
+
+                        Add Room
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 RoomBooker. Meeting Room Booking System.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

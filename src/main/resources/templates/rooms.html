@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomBooker - Rooms</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <style>
+        .filter-section {
+            background: white;
+            padding: 22px;
+            margin-top: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .filter-section h3 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            color: #222;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            border: 1px solid #d8dce5;
+            border-radius: 7px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .filter-btn {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+            background: #315bb5;
+            color: white;
+        }
+
+        .clear-btn {
+            background: #e9edf5;
+            color: #333;
+        }
+
+        .results-count {
+            margin: 18px 0 12px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container header-content">
+        <div class="logo">Room<span>Booker</span></div>
+
+        <nav class="nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/rooms">Rooms</a>
+            <a href="/book">Book Room</a>
+            <a href="/my-bookings">My Bookings</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="main">
+    <div class="container">
+
+        <div class="dashboard-heading">
+            <h1 class="page-title">Available Meeting Rooms</h1>
+            <p class="page-subtitle">
+                Search and filter meeting rooms based on your needs.
+            </p>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="filter-section">
+            <h3>Find Your Meeting Room</h3>
+
+            <div class="filter-grid">
+
+                <div class="filter-group">
+                    <label for="roomSearch">Search Room</label>
+                    <input type="text"
+                           id="roomSearch"
+                           placeholder="Enter room name...">
+                </div>
+
+                <div class="filter-group">
+                    <label for="capacityFilter">Minimum Capacity</label>
+                    <input type="number"
+                           id="capacityFilter"
+                           min="1"
+                           placeholder="Enter people count">
+                </div>
+
+                <div class="filter-group">
+                    <label for="amenitiesFilter">Required Amenity</label>
+                    <select id="amenitiesFilter">
+                        <option value="">All Amenities</option>
+                        <option value="ac">AC</option>
+                        <option value="fan">Fan</option>
+                        <option value="projector">Projector</option>
+                        <option value="mic">Microphone</option>
+                        <option value="tv">TV</option>
+                        <option value="chairs">Chairs</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="filter-buttons">
+                <button type="button"
+                        class="filter-btn"
+                        onclick="filterRooms()">
+                    Search Rooms
+                </button>
+
+                <button type="button"
+                        class="filter-btn clear-btn"
+                        onclick="clearFilters()">
+                    Clear Filters
+                </button>
+            </div>
+        </div>
+
+        <p class="results-count" id="resultsCount" aria-live="polite">
+            Showing all rooms
+        </p>
+
+        <!-- Rooms Table -->
+        <div class="rooms-table-container">
+            <table class="rooms-table">
+
+                <thead>
+                    <tr>
+                        <th>Room ID</th>
+                        <th>Room Name</th>
+                        <th>Capacity</th>
+                        <th>Amenities</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="roomsTableBody">
+
+                    <tr th:each="room : ${rooms}"
+                        class="room-row"
+                        th:attr="data-room-name=${room.roomName},
+                                 data-capacity=${room.capacity},
+                                 data-amenities=${room.amenities},
+                                 data-status=${room.status}">
+
+                        <td th:text="${room.roomId}">2</td>
+
+                        <td class="room-name"
+                            th:text="${room.roomName}">
+                            Seminar Hall
+                        </td>
+
+                        <td th:text="${room.capacity}">50</td>
+
+                        <td th:text="${room.amenities}">
+                            AC, Fan, Projector
+                        </td>
+
+                        <td>
+                            <span class="available-status"
+                                  th:text="${room.status}">
+                                Available
+                            </span>
+                        </td>
+
+                        <td>
+                            <a th:if="${room.status == 'Available'}"
+                               th:href="@{/book}"
+                               class="small-book-btn">
+                                Book
+                            </a>
+
+                            <span th:unless="${room.status == 'Available'}">
+                                Unavailable
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <p id="noResults" class="no-results" hidden>
+                No rooms match your search. Try different filters.
+            </p>
+        </div>
+
+        <div class="rooms-back">
+            <a href="/dashboard" class="btn btn-secondary">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 RoomBooker. Meeting Room Booking System.</p>
+    </div>
+</footer>
+
+<script>
+    function filterRooms() {
+        const searchText =
+            document.getElementById("roomSearch")
+                .value.trim().toLowerCase();
+
+        const minCapacity =
+            parseInt(document.getElementById("capacityFilter").value, 10) || 0;
+
+        const requiredAmenity =
+            document.getElementById("amenitiesFilter")
+                .value.toLowerCase();
+
+        const rows = document.querySelectorAll(".room-row");
+
+        let visibleCount = 0;
+
+        rows.forEach(function(row) {
+            const roomName =
+                (row.dataset.roomName || "").toLowerCase();
+
+            const capacity =
+                parseInt(row.dataset.capacity, 10) || 0;
+
+            const amenities =
+                (row.dataset.amenities || "").toLowerCase();
+
+            const nameMatches =
+                roomName.includes(searchText);
+
+            const capacityMatches =
+                capacity >= minCapacity;
+
+            const amenityMatches =
+                requiredAmenity === "" ||
+                amenities.includes(requiredAmenity);
+
+            const matches =
+                nameMatches && capacityMatches && amenityMatches;
+
+            row.hidden = !matches;
+
+            if (matches) {
+                visibleCount++;
+            }
+        });
+
+        document.getElementById("resultsCount").textContent =
+            "Showing " + visibleCount + " of " + rows.length + " rooms";
+
+        document.getElementById("noResults").hidden =
+            visibleCount !== 0;
+    }
+
+    function clearFilters() {
+        document.getElementById("roomSearch").value = "";
+        document.getElementById("capacityFilter").value = "";
+        document.getElementById("amenitiesFilter").value = "";
+
+        filterRooms();
+    }
+
+    document.getElementById("roomSearch")
+        .addEventListener("input", filterRooms);
+
+    document.getElementById("capacityFilter")
+        .addEventListener("input", filterRooms);
+
+    document.getElementById("amenitiesFilter")
+        .addEventListener("change", filterRooms);
+
+    filterRooms();
+</script>
+
+</body>
+</html>

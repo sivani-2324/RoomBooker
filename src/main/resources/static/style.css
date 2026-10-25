@@ -1,0 +1,1095 @@
+```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   COMMON CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1180px;
+    margin: auto;
+}
+
+
+/* =========================
+   HEADER / NAVBAR
+========================= */
+
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e6eaf0;
+    padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 700;
+    color: #123b72;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    font-weight: 400;
+    color: #3974b8;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: #4b5563;
+    text-decoration: none;
+    padding: 9px 13px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.nav a:hover {
+    background: #eef4fb;
+    color: #123b72;
+}
+
+
+/* =========================
+   MAIN AREA
+========================= */
+
+.main {
+    padding: 48px 0 60px;
+}
+
+.dashboard-heading {
+    margin-bottom: 28px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #172033;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   WELCOME CARD
+========================= */
+
+.welcome-card {
+    background: #123b72;
+    color: white;
+    padding: 30px 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(18, 59, 114, 0.12);
+}
+
+.welcome-card h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.welcome-card p {
+    font-size: 14px;
+    color: #dce8f7;
+}
+
+.welcome-card .btn {
+    background: white;
+    color: #123b72;
+    white-space: nowrap;
+}
+
+.welcome-card .btn:hover {
+    background: #f1f5f9;
+}
+
+
+/* =========================
+   DASHBOARD CARDS
+========================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.dashboard-card {
+    background: white;
+    border: 1px solid #e5e9ef;
+    border-radius: 10px;
+    padding: 26px;
+    text-decoration: none;
+    color: inherit;
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    border-color: #cbd9e8;
+    box-shadow: 0 10px 25px rgba(20, 40, 70, 0.08);
+}
+
+.card-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    background: #eef4fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.dashboard-card h3 {
+    font-size: 18px;
+    color: #172033;
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.card-link {
+    margin-top: auto;
+    padding-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2865a5;
+}
+
+
+/* =========================
+   INFORMATION SECTION
+========================= */
+
+.info-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 28px;
+}
+
+.info-box {
+    background: white;
+    border: 1px solid #e5e9ef;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.info-box h3 {
+    font-size: 16px;
+    color: #172033;
+    margin-bottom: 9px;
+}
+
+.info-box p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    display: inline-block;
+    border: none;
+    background: #2865a5;
+    color: white;
+    padding: 11px 19px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    background: #1f538a;
+}
+
+.btn-secondary {
+    background: #64748b;
+}
+
+.btn-secondary:hover {
+    background: #475569;
+}
+
+.btn-danger {
+    background: #c0392b;
+}
+
+.btn-danger:hover {
+    background: #a93226;
+}
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+.form-card {
+    background: white;
+    max-width: 520px;
+    margin: 30px auto;
+    padding: 34px;
+    border: 1px solid #e5e9ef;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(20, 40, 70, 0.06);
+}
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #d5dbe3;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #172033;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3974b8;
+    box-shadow: 0 0 0 3px rgba(57, 116, 184, 0.10);
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container {
+    background: white;
+    padding: 22px;
+    border: 1px solid #e5e9ef;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #123b72;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e8ecf1;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background: #f5f7fb;
+}
+
+.login-card {
+    background: white;
+    width: 100%;
+    max-width: 430px;
+    padding: 42px;
+    border: 1px solid #e3e8ef;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(20, 40, 70, 0.08);
+}
+
+.login-card h1 {
+    color: #123b72;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.login-card h2 {
+    font-size: 15px;
+    font-weight: 400;
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+.success {
+    color: #15803d;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.error {
+    color: #c0392b;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e9ef;
+    padding: 22px 0;
+    text-align: center;
+}
+
+.footer p {
+    color: #7b8492;
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-section {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 92%;
+    }
+
+    .main {
+        padding: 32px 0 45px;
+    }
+
+    .page-title {
+        font-size: 27px;
+    }
+
+    .welcome-card {
+        padding: 24px;
+    }
+
+    .dashboard-card {
+        min-height: 210px;
+    }
+
+    .login-card {
+        padding: 30px 24px;
+    }
+
+    .nav {
+        width: 100%;
+    }
+}
+
+
+.hero-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 22px;
+}
+
+.welcome-content {
+    flex: 1;
+}
+/* Clean Dashboard Hero Section */
+
+.hero-section {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-image {
+    display: block;
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.hero-content {
+    padding: 28px 30px 30px;
+}
+
+.hero-content h2 {
+    margin: 0 0 10px;
+    font-size: 28px;
+}
+
+.hero-content p {
+    margin: 0 0 22px;
+    color: #666;
+    font-size: 16px;
+}
+
+.hero-content .btn {
+    display: inline-block;
+}
+
+
+/* Dashboard Cards */
+
+.dashboard-card {
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-card h3 {
+    margin: 12px 0 8px;
+}
+
+.dashboard-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.card-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 600;
+}
+/* ============================= */
+/* Rooms Table */
+/* ============================= */
+
+.rooms-table-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+}
+
+.rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+.rooms-table th {
+    text-align: left;
+    padding: 16px;
+    background: #f5f7fb;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.rooms-table td {
+    padding: 16px;
+    border-bottom: 1px solid #eeeeee;
+    color: #555;
+    font-size: 14px;
+}
+
+.rooms-table tbody tr:hover {
+    background: #fafbfe;
+}
+
+.rooms-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.room-name {
+    font-weight: 600;
+    color: #222 !important;
+}
+
+.available-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #e8f7ee;
+    color: #218838;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.small-book-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #315bb5;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.small-book-btn:hover {
+    opacity: 0.9;
+}
+
+.rooms-back {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.btn-secondary {
+    text-decoration: none;
+}
+/* ============================= */
+/* Booking Page */
+/* ============================= */
+
+.booking-form-container {
+    max-width: 700px;
+    margin: 30px auto 0;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.booking-form-container .form-group {
+    margin-bottom: 22px;
+}
+
+.booking-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.booking-form-container input,
+.booking-form-container select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d9dfe8;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: white;
+}
+
+.booking-form-container input:focus,
+.booking-form-container select:focus {
+    outline: none;
+    border-color: #315bb5;
+}
+
+.booking-submit {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+}
+/* ========================================= */
+/* PROFESSIONAL BOOK ROOM PAGE */
+/* ========================================= */
+
+.booking-form-container {
+    max-width: 760px;
+    margin: 35px auto 0;
+    background: #ffffff;
+    padding: 40px 45px;
+    border-radius: 14px;
+    border: 1px solid #e6eaf0;
+    box-shadow: 0 8px 25px rgba(30, 50, 80, 0.08);
+}
+
+/* Form group */
+
+.booking-form-container .form-group {
+    margin-bottom: 25px;
+}
+
+/* Labels */
+
+.booking-form-container label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #263449;
+}
+
+/* Inputs and Select */
+
+.booking-form-container input,
+.booking-form-container select {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #d8dee8;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #263449;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+/* Placeholder */
+
+.booking-form-container input::placeholder {
+    color: #9aa4b2;
+}
+
+/* Focus */
+
+.booking-form-container input:focus,
+.booking-form-container select:focus {
+    outline: none;
+    border-color: #315bb5;
+    box-shadow: 0 0 0 3px rgba(49, 91, 181, 0.10);
+}
+
+/* Booking button */
+
+.booking-submit {
+    width: 100%;
+    height: 50px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 7px;
+    background: #315bb5;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.booking-submit:hover {
+    background: #274b98;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(49, 91, 181, 0.20);
+}
+
+/* Back button area */
+
+.rooms-back {
+    max-width: 760px;
+    margin: 22px auto 30px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .booking-form-container {
+        padding: 28px 22px;
+        margin-top: 25px;
+    }
+
+    .booking-form-container input,
+    .booking-form-container select {
+        height: 46px;
+    }
+
+    .booking-submit {
+        height: 48px;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    overflow-wrap: break-word;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* Responsive navigation */
+.header-content {
+    min-width: 0;
+}
+
+.nav a {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Prevent long content from breaking layouts */
+.container,
+.dashboard-card,
+.info-box,
+.form-card,
+.login-card,
+.booking-form-container {
+    min-width: 0;
+}
+
+/* Better tap targets */
+button,
+.btn,
+.small-book-btn {
+    min-height: 42px;
+    touch-action: manipulation;
+}
+
+/* Responsive tables */
+.table-container,
+.rooms-table-container {
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Tablet */
+@media (max-width: 850px) {
+    .container {
+        width: 94%;
+    }
+
+    .header {
+        padding: 14px 0;
+    }
+
+    .header-content {
+        gap: 14px;
+    }
+
+    .nav {
+        gap: 5px;
+    }
+
+    .nav a {
+        padding: 9px 10px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-card {
+        min-height: 200px;
+        padding: 22px;
+    }
+
+    .booking-form-container {
+        width: 100%;
+        max-width: 700px;
+        padding: 30px;
+    }
+
+    .dashboard-image {
+        height: 260px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+    .container {
+        width: 92%;
+    }
+
+    .header {
+        position: relative;
+        padding: 16px 0;
+    }
+
+    .header-content {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .nav {
+        display: flex;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .nav a {
+        font-size: 13px;
+        padding: 9px 10px;
+    }
+
+    .main {
+        padding: 26px 0 38px;
+    }
+
+    .page-title {
+        font-size: 25px;
+        line-height: 1.3;
+    }
+
+    .page-subtitle {
+        font-size: 14px;
+    }
+
+    .dashboard-grid,
+    .info-section {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .dashboard-card {
+        min-height: auto;
+        padding: 22px;
+    }
+
+    .card-link {
+        padding-top: 16px;
+    }
+
+    .welcome-card {
+        padding: 23px 20px;
+        gap: 18px;
+    }
+
+    .welcome-card h2 {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    .welcome-card .btn {
+        white-space: normal;
+    }
+
+    .hero-section {
+        margin-top: 20px;
+        margin-bottom: 25px;
+    }
+
+    .dashboard-image,
+    .hero-image {
+        height: 190px;
+    }
+
+    .hero-content {
+        padding: 22px 20px;
+    }
+
+    .hero-content h2 {
+        font-size: 23px;
+        line-height: 1.35;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .form-card,
+    .login-card {
+        padding: 26px 20px;
+        margin: 20px auto;
+    }
+
+    .login-page {
+        padding: 18px;
+    }
+
+    .login-card h1 {
+        font-size: 25px;
+    }
+
+    .booking-form-container {
+        margin-top: 20px;
+        padding: 24px 18px;
+        border-radius: 10px;
+    }
+
+    .booking-form-container .form-group {
+        margin-bottom: 20px;
+    }
+
+    .booking-form-container input,
+    .booking-form-container select,
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        max-width: 100%;
+    }
+
+    .booking-submit {
+        height: 48px;
+    }
+
+    .rooms-back {
+        margin-top: 18px;
+    }
+
+    .table-container,
+    .rooms-table-container {
+        padding: 12px;
+    }
+
+    .rooms-table {
+        min-width: 700px;
+    }
+
+    th,
+    td {
+        padding: 11px;
+        font-size: 13px;
+    }
+
+    .footer {
+        padding: 18px 0;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .container {
+        width: 94%;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .nav a {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .page-title {
+        font-size: 23px;
+    }
+
+    .welcome-card,
+    .dashboard-card,
+    .info-box {
+        padding: 18px;
+    }
+
+    .login-card,
+    .form-card {
+        padding: 22px 16px;
+    }
+
+    .booking-form-container {
+        padding: 20px 14px;
+    }
+}

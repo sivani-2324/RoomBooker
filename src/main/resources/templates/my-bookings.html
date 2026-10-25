@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomBooker - My Bookings</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <style>
+        .bookings-page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .bookings-header {
+            margin-bottom: 24px;
+        }
+
+        .bookings-header p {
+            color: #6b7280;
+        }
+
+        .bookings-card, .calendar-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.06);
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .card-heading {
+            padding: 22px 25px;
+            background: #f8faff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .card-heading h2 {
+            margin: 0 0 5px;
+            color: #1f2937;
+            font-size: 20px;
+        }
+
+        .card-heading p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .calendar-content {
+            padding: 24px;
+        }
+
+        .calendar-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-top h3 {
+            margin: 0;
+            text-align: center;
+            color: #1f2937;
+        }
+
+        .calendar-btn {
+            border: 1px solid #d1d5db;
+            background: #fff;
+            padding: 9px 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .calendar-btn:hover {
+            background: #eef2ff;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 7px;
+        }
+
+        .weekday {
+            text-align: center;
+            font-weight: 700;
+            color: #6b7280;
+            font-size: 12px;
+            padding: 8px 0;
+        }
+
+        .calendar-day {
+            min-height: 70px;
+            padding: 8px 3px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            border-radius: 9px;
+            cursor: pointer;
+            text-align: center;
+            color: #374151;
+        }
+
+        .calendar-day:hover {
+            background: #f3f6ff;
+        }
+
+        .calendar-day.selected {
+            border: 2px solid #315bb5;
+            background: #eef2ff;
+        }
+
+        .calendar-day.today .day-number {
+            background: #315bb5;
+            color: white;
+            border-radius: 50%;
+            padding: 4px 7px;
+        }
+
+        .calendar-day.empty {
+            border-color: transparent;
+            background: transparent;
+            cursor: default;
+        }
+
+        .day-number {
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .booking-dot {
+            display: block;
+            margin: 7px auto 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #218838;
+        }
+
+        .selected-date-bookings {
+            margin-top: 24px;
+            padding: 18px;
+            background: #f8faff;
+            border-radius: 12px;
+        }
+
+        .selected-date-bookings h3 {
+            margin-top: 0;
+        }
+
+        .date-booking-item {
+            background: white;
+            padding: 13px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .bookings-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .bookings-table th,
+        .bookings-table td {
+            text-align: left;
+            padding: 15px 16px;
+            border-bottom: 1px solid #eef0f3;
+            font-size: 14px;
+        }
+
+        .bookings-table th {
+            color: #374151;
+            font-size: 13px;
+        }
+
+        .bookings-table td {
+            color: #4b5563;
+        }
+
+        .booking-id {
+            color: #315bb5 !important;
+            font-weight: 700;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-booked {
+            background: #e8f7ee;
+            color: #218838;
+        }
+
+        .status-cancelled {
+            background: #fcebea;
+            color: #c0392b;
+        }
+
+        .cancel-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            border: 1px solid #dc3545;
+            border-radius: 6px;
+            color: #dc3545;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .cancel-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .cancelled-text {
+            color: #9ca3af;
+        }
+
+        .empty-bookings {
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        .booking-actions {
+            margin: 20px 0;
+        }
+
+        .dashboard-back {
+            display: inline-block;
+            padding: 11px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .calendar-content {
+                padding: 12px;
+            }
+
+            .calendar-day {
+                min-height: 55px;
+                padding: 7px 2px;
+                font-size: 13px;
+            }
+
+            .calendar-grid {
+                gap: 3px;
+            }
+
+            .calendar-top h3 {
+                font-size: 15px;
+            }
+
+            .calendar-btn {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container header-content">
+        <div class="logo">Room<span>Booker</span></div>
+
+        <nav class="nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/rooms">Rooms</a>
+            <a href="/book">Book Room</a>
+            <a href="/my-bookings">My Bookings</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="main">
+    <div class="container bookings-page">
+
+        <div class="bookings-header">
+            <h1 class="page-title">My Bookings</h1>
+            <p>View and manage your meeting room reservations.</p>
+        </div>
+
+        <!-- BOOKING CALENDAR -->
+        <section class="calendar-card">
+            <div class="card-heading">
+                <h2>Booking Calendar</h2>
+                <p>Select a date to view your bookings for that day.</p>
+            </div>
+
+            <div class="calendar-content">
+
+                <div class="calendar-top">
+                    <button type="button" class="calendar-btn"
+                            id="previousMonth">&#8592; Previous</button>
+
+                    <h3 id="monthTitle">Month Year</h3>
+
+                    <button type="button" class="calendar-btn"
+                            id="nextMonth">Next &#8594;</button>
+                </div>
+
+                <div class="calendar-grid" id="calendarGrid"></div>
+
+                <div class="selected-date-bookings">
+                    <h3 id="selectedDateTitle">Selected date</h3>
+                    <div id="selectedDateList">
+                        Select a date to view bookings.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BOOKING HISTORY -->
+        <section class="bookings-card">
+            <div class="card-heading">
+                <h2>Booking History</h2>
+                <p>Your current and previous meeting room bookings.</p>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="bookings-table">
+                    <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Room ID</th>
+                        <th>User Name</th>
+                        <th>Date</th>
+                        <th>Time Slot</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="booking : ${bookings}">
+                        <td class="booking-id"
+                            th:text="${booking.bookingId}">1</td>
+
+                        <td th:text="${booking.roomId}">2</td>
+
+                        <td th:text="${booking.userName}">User</td>
+
+                        <td th:text="${booking.bookingDatetime}">2026-09-18</td>
+
+                        <td th:text="${booking.fullDay ? 'Full Day' : (booking.slot != null ? booking.slot : booking.startTime + ' - ' + booking.endTime)}">
+                            10:00 AM - 11:00 AM
+                        </td>
+
+                        <td>
+                            <span class="status status-booked"
+                                  th:if="${booking.status == 'Booked'}"
+                                  th:text="${booking.status}">Booked</span>
+
+                            <span class="status status-cancelled"
+                                  th:if="${booking.status == 'Cancelled'}"
+                                  th:text="${booking.status}">Cancelled</span>
+                        </td>
+
+                        <td>
+                            <a th:if="${booking.status == 'Booked'}"
+                               th:href="@{/cancel-booking(bookingId=${booking.bookingId})}"
+                               class="cancel-btn">Cancel</a>
+
+                            <span th:if="${booking.status == 'Cancelled'}"
+                                  class="cancelled-text">Cancelled</span>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(bookings)}">
+                        <td colspan="7">
+                            <div class="empty-bookings">
+                                <h3>No bookings found</h3>
+                                <p>You haven't booked any meeting rooms yet.</p>
+                                <a href="/book" class="btn">Book a Room</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="booking-actions">
+            <a href="/dashboard" class="dashboard-back">
+                &#8592; Back to Dashboard
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 RoomBooker. Meeting Room Booking System.</p>
+    </div>
+</footer>
+
+<script th:inline="javascript">
+    /*
+     * Thymeleaf supplies the booking information from the server.
+     * The date is converted to a string so date comparisons are consistent.
+     */
+    const allBookings = [
+        /*[# th:each="booking : ${bookings}"]*/
+        {
+            id: /*[[${booking.bookingId}]]*/ 0,
+            date: /*[[${#strings.substring(booking.bookingDatetime.toString(), 0, 10)}]]*/ "",
+            roomId: /*[[${booking.roomId}]]*/ 0,
+            slot: /*[[${booking.fullDay ? 'Full Day' : (booking.slot != null ? booking.slot : booking.startTime + ' - ' + booking.endTime)}]]*/ "",
+            status: /*[[${booking.status}]]*/ ""
+        },
+        /*[/]*/
+    ];
+
+    const grid = document.getElementById("calendarGrid");
+    const monthTitle = document.getElementById("monthTitle");
+    const selectedDateTitle = document.getElementById("selectedDateTitle");
+    const selectedDateList = document.getElementById("selectedDateList");
+
+    const today = new Date();
+    let shownYear = today.getFullYear();
+    let shownMonth = today.getMonth();
+    let selectedDate = formatDate(today);
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+
+        return year + "-" + month + "-" + day;
+    }
+
+    function normalizeDate(value) {
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+        // Handles dates like 2026-09-18 and timestamps starting with that date.
+        return String(value).trim().substring(0, 10);
+    }
+
+    function isActiveBooking(booking) {
+        return String(booking.status || "").trim().toLowerCase() === "booked";
+    }
+
+    function getBookingsForDate(date) {
+        return allBookings.filter(function (booking) {
+            return normalizeDate(booking.date) === date &&
+                   isActiveBooking(booking);
+        });
+    }
+
+    function renderSelectedDate() {
+        selectedDateTitle.textContent = "Bookings for " + selectedDate;
+        selectedDateList.replaceChildren();
+
+        const matches = getBookingsForDate(selectedDate);
+
+        if (matches.length === 0) {
+            selectedDateList.textContent =
+                "No active bookings on this date.";
+            return;
+        }
+
+        matches.forEach(function (booking) {
+            const item = document.createElement("div");
+            item.className = "date-booking-item";
+
+            item.textContent =
+                "Booking #" + booking.id +
+                " | Room " + booking.roomId +
+                " | " + (booking.slot || "Time not specified");
+
+            selectedDateList.appendChild(item);
+        });
+    }
+
+    function renderCalendar() {
+        grid.replaceChildren();
+
+        const monthNames = [
+            "January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December"
+        ];
+
+        monthTitle.textContent =
+            monthNames[shownMonth] + " " + shownYear;
+
+        ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+            .forEach(function (day) {
+                const heading = document.createElement("div");
+                heading.className = "weekday";
+                heading.textContent = day;
+                grid.appendChild(heading);
+            });
+
+        const firstDay = new Date(shownYear, shownMonth, 1).getDay();
+        const daysInMonth =
+            new Date(shownYear, shownMonth + 1, 0).getDate();
+
+        // Empty cells before the first day of the month
+        for (let i = 0; i < firstDay; i++) {
+            const empty = document.createElement("div");
+            empty.className = "calendar-day empty";
+            grid.appendChild(empty);
+        }
+
+        // Calendar dates
+        for (let day = 1; day <= daysInMonth; day++) {
+            const date = formatDate(
+                new Date(shownYear, shownMonth, day)
+            );
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "calendar-day";
+            button.setAttribute("aria-label", date);
+
+            if (date === formatDate(today)) {
+                button.classList.add("today");
+            }
+
+            if (date === selectedDate) {
+                button.classList.add("selected");
+            }
+
+            const number = document.createElement("span");
+            number.className = "day-number";
+            number.textContent = day;
+            button.appendChild(number);
+
+            // Add a green dot when active bookings exist on this date
+            if (getBookingsForDate(date).length > 0) {
+                const dot = document.createElement("span");
+                dot.className = "booking-dot";
+                button.appendChild(dot);
+            }
+
+            button.addEventListener("click", function () {
+                selectedDate = date;
+                renderCalendar();
+                renderSelectedDate();
+            });
+
+            grid.appendChild(button);
+        }
+    }
+
+    document.getElementById("previousMonth")
+        .addEventListener("click", function () {
+            shownMonth--;
+
+            if (shownMonth < 0) {
+                shownMonth = 11;
+                shownYear--;
+            }
+
+            renderCalendar();
+        });
+
+    document.getElementById("nextMonth")
+        .addEventListener("click", function () {
+            shownMonth++;
+
+            if (shownMonth > 11) {
+                shownMonth = 0;
+                shownYear++;
+            }
+
+            renderCalendar();
+        });
+
+    renderCalendar();
+    renderSelectedDate();
+</script>
+
+</body>
+</html>
